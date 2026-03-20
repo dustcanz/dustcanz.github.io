@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Name — About</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;900&family=IBM+Plex+Mono:wght@400;700&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --black: #000000;
+      --white: #ffffff;
+      --blue:  #0000ff;
+      --f-display: 'Barlow Condensed', sans-serif;
+      --f-mono:    'IBM Plex Mono', monospace;
+      --f-body:    'Noto Sans JP', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--f-body);
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      border-bottom: 2px solid var(--white);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--black);
+    }
+    .nav-tab {
+      flex: 1;
+      padding: 1rem;
+      text-align: center;
+      font-family: var(--f-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--white);
+      border-right: 2px solid var(--white);
+      transition: background 0.15s, color 0.15s;
+    }
+    .nav-tab:last-child { border-right: none; }
+    .nav-tab.active {
+      background: var(--blue);
+      color: var(--white);
+    }
+    .nav-tab:not(.active):hover {
+      background: var(--white);
+      color: var(--black);
+    }
+
+    /* ── PAGE LAYOUT ── */
+    .page {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 6rem;
+    }
+
+    /* ── SECTION HEADER ── */
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1.2rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 2px solid var(--white);
+      padding-bottom: 0.75rem;
+      opacity: 0;
+      animation: fadeUp 0.5s forwards;
+    }
+    .section-num {
+      font-family: var(--f-mono);
+      font-size: 0.65rem;
+      color: var(--blue);
+      letter-spacing: 0.15em;
+      background: var(--blue);
+      color: var(--white);
+      padding: 0.1rem 0.4rem;
+    }
+    .section-title {
+      font-family: var(--f-display);
+      font-size: 2.2rem;
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    /* ── ABOUT TEXT ── */
+    .about-block {
+      margin-bottom: 4rem;
+    }
+    .about-text {
+      font-size: 0.9rem;
+      color: #ccc;
+      line-height: 1.9;
+      max-width: 60ch;
+      opacity: 0;
+      animation: fadeUp 0.5s 0.15s forwards;
+    }
+    .about-text p + p { margin-top: 1rem; }
+
+    /* tag chips */
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.2rem;
+      opacity: 0;
+      animation: fadeUp 0.5s 0.25s forwards;
+    }
+    .tag {
+      font-family: var(--f-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: 1.5px solid var(--white);
+      padding: 0.2rem 0.55rem;
+      color: var(--white);
+    }
+    .tag.blue {
+      background: var(--blue);
+      border-color: var(--blue);
+    }
+
+    /* ── GAMES ── */
+    .games-block { margin-bottom: 4rem; }
+
+    .game-entry {
+      border: 2px solid var(--white);
+      margin-bottom: -2px;
+      opacity: 0;
+      animation: fadeUp 0.5s forwards;
+    }
+    .game-entry:nth-child(1) { animation-delay: 0.1s; }
+    .game-entry:nth-child(2) { animation-delay: 0.2s; }
+    .game-entry:nth-child(3) { animation-delay: 0.3s; }
+
+    .game-header {
+      display: flex;
+      align-items: center;
+      padding: 1rem 1.25rem;
+      gap: 1rem;
+      border-bottom: 2px solid var(--white);
+      background: var(--white);
+      color: var(--black);
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.15s;
+    }
+    .game-header:hover { background: #ddd; }
+
+    .game-header-open { background: var(--blue); color: var(--white); border-bottom-color: var(--blue); }
+    .game-header-open:hover { background: #0000cc; }
+
+    .game-title {
+      font-family: var(--f-display);
+      font-size: 1.4rem;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      flex: 1;
+      line-height: 1;
+    }
+    .game-rating-badge {
+      font-family: var(--f-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      background: var(--black);
+      color: var(--white);
+      padding: 0.3rem 0.6rem;
+    }
+    .game-header-open .game-rating-badge {
+      background: var(--white);
+      color: var(--blue);
+    }
+    .game-toggle {
+      font-family: var(--f-mono);
+      font-size: 1rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .game-body {
+      display: none;
+      padding: 1.5rem 1.25rem;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .game-body.open { display: flex; }
+
+    .game-desc {
+      font-size: 0.85rem;
+      color: #aaa;
+      line-height: 1.8;
+      max-width: 60ch;
+    }
+
+    /* best30 image */
+    .game-image-wrapper {
+      width: 100%;
+      border: 2px solid var(--white);
+      overflow: hidden;
+      position: relative;
+      background: #111;
+    }
+    .game-image-wrapper img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .game-image-placeholder {
+      width: 100%;
+      padding: 3rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      color: #444;
+      font-family: var(--f-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-align: center;
+      border: 2px dashed #333;
+    }
+    .game-image-placeholder .ph-icon { font-size: 2rem; }
+    .game-image-caption {
+      font-family: var(--f-mono);
+      font-size: 0.65rem;
+      color: #555;
+      letter-spacing: 0.1em;
+      text-align: right;
+    }
+
+    /* stat row */
+    .game-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+    }
+    .game-stat {
+      flex: 1;
+      min-width: 120px;
+      border: 1.5px solid var(--white);
+      margin-right: -1.5px;
+      padding: 0.75rem 1rem;
+    }
+    .game-stat-label {
+      display: block;
+      font-family: var(--f-mono);
+      font-size: 0.6rem;
+      color: #666;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.2rem;
+    }
+    .game-stat-value {
+      display: block;
+      font-family: var(--f-display);
+      font-size: 1.6rem;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--blue);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 2px solid var(--white);
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    footer p {
+      font-family: var(--f-mono);
+      font-size: 0.65rem;
+      color: #555;
+      letter-spacing: 0.1em;
+    }
+    .footer-sq { width: 8px; height: 8px; background: var(--blue); }
+
+    /* ── ANIMATION ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* scroll reveal */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 600px) {
+      .section-title { font-size: 1.6rem; }
+      .game-title { font-size: 1.1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-tab">Links</a>
+    <a href="about.html" class="nav-tab active">About</a>
+  </nav>
+
+  <div class="page">
+
+    <!-- ── 01 ABOUT ── -->
+    <div class="about-block">
+      <div class="section-header" style="animation-delay:0.05s">
+        <span class="section-num">01</span>
+        <h2 class="section-title">About</h2>
+      </div>
+      <div class="about-text">
+        <p>ここに自己紹介を書いてください。趣味、好きなこと、普段やっていることなど自由に書いていただけます。</p>
+        <p>複数の段落に分けて書くこともできます。</p>
+      </div>
+      <div class="tags">
+        <!-- 好きなタグに変更してください -->
+        <span class="tag blue">音ゲー</span>
+        <span class="tag">プログラミング</span>
+        <span class="tag">アニメ</span>
+        <span class="tag">ゲーム</span>
+        <span class="tag">○○</span>
+      </div>
+    </div>
+
+    <!-- ── 02 GAMES ── -->
+    <div class="games-block reveal">
+      <div class="section-header">
+        <span class="section-num">02</span>
+        <h2 class="section-title">音ゲー</h2>
+      </div>
+
+      <!-- CHUNITHM -->
+      <div class="game-entry">
+        <div class="game-header" onclick="toggleGame(this)">
+          <span class="game-title">CHUNITHM</span>
+          <span class="game-rating-badge">Rating 16.72</span>
+          <span class="game-toggle">＋</span>
+        </div>
+        <div class="game-body">
+          <div class="game-stats">
+            <div class="game-stat">
+              <span class="game-stat-label">Rating</span>
+              <span class="game-stat-value">16.72</span>
+            </div>
+            <div class="game-stat">
+              <span class="game-stat-label">Best</span>
+              <span class="game-stat-value">17.00</span>
+            </div>
+            <div class="game-stat">
+              <span class="game-stat-label">New</span>
+              <span class="game-stat-value">16.30</span>
+            </div>
+          </div>
+          <p class="game-desc">ここにCHUNITHMについてのコメントを書いてください。好きな曲、得意な譜面など自由に。</p>
+          <div class="game-image-wrapper">
+            <!--
+              Best30画像を表示するには:
+              1. リポジトリに img/ フォルダを作り chunithm.jpg を入れる
+              2. 下の <img> タグのコメントを外す
+              3. <div class="game-image-placeholder"> 全体を削除
+            -->
+            <!-- <img src="img/chunithm.jpg" alt="CHUNITHM Best30"> -->
+            <div class="game-image-placeholder">
+              <span class="ph-icon">🎵</span>
+              <span>img/chunithm.jpg を配置してください</span>
+            </div>
+          </div>
+          <p class="game-image-caption">// Generated by ベスト枠画像ジェネレーター NEW</p>
+        </div>
+      </div>
+
+      <!-- ARCAEA -->
+      <div class="game-entry">
+        <div class="game-header" onclick="toggleGame(this)">
+          <span class="game-title">Arcaea</span>
+          <span class="game-rating-badge">PTT 12.50</span>
+          <span class="game-toggle">＋</span>
+        </div>
+        <div class="game-body">
+          <div class="game-stats">
+            <div class="game-stat">
+              <span class="game-stat-label">Potential</span>
+              <span class="game-stat-value">12.50</span>
+            </div>
+            <div class="game-stat">
+              <span class="game-stat-label">Best</span>
+              <span class="game-stat-value">Aegleseeker</span>
+            </div>
+            <div class="game-stat">
+              <span class="game-stat-label">Score</span>
+              <span class="game-stat-value">9'921'707</span>
+            </div>
+          </div>
+          <p class="game-desc">ここにArcaeaについてのコメントを書いてください。好きなキャラ、得意な譜面など自由に。</p>
+          <div class="game-image-wrapper">
+            <!--
+              Best30画像を表示するには:
+              1. リポジトリに img/ フォルダを作り arcaea.jpg を入れる
+              2. 下の <img> タグのコメントを外す
+              3. <div class="game-image-placeholder"> 全体を削除
+            -->
+            <!-- <img src="img/arcaea.jpg" alt="Arcaea Best30"> -->
+            <div class="game-image-placeholder">
+              <span class="ph-icon">🎵</span>
+              <span>img/arcaea.jpg を配置してください</span>
+            </div>
+          </div>
+          <p class="game-image-caption">// Generated by lowiro</p>
+        </div>
+      </div>
+
+      <!-- 追加ゲーム用テンプレート（必要に応じてコピー） -->
+      <!--
+      <div class="game-entry">
+        <div class="game-header" onclick="toggleGame(this)">
+          <span class="game-title">ゲーム名</span>
+          <span class="game-rating-badge">Rating XX.XX</span>
+          <span class="game-toggle">＋</span>
+        </div>
+        <div class="game-body">
+          ...
+        </div>
+      </div>
+      -->
+
+    </div>
+
+  </div>
+
+  <footer>
+    <p>© 2025 Your Name</p>
+    <div class="footer-sq"></div>
+    <p>GitHub Pages</p>
+  </footer>
+
+  <script>
+    function toggleGame(header) {
+      const body = header.nextElementSibling;
+      const toggle = header.querySelector('.game-toggle');
+      const isOpen = body.classList.contains('open');
+
+      body.classList.toggle('open', !isOpen);
+      header.classList.toggle('game-header-open', !isOpen);
+      toggle.textContent = isOpen ? '＋' : '－';
+    }
+
+    // scroll reveal
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  </script>
+
+</body>
+</html>
