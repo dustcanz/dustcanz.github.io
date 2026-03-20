@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Your Name — About</title>
+  <title>dustcanz — About</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;600&family=IBM+Plex+Mono:wght@300;400&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet" />
   <style>
@@ -25,9 +25,11 @@
       font-family: var(--f-body);
       font-weight: 300;
       min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
-    /* ── NAV ── */
+    /* ── PAGE NAV ── */
     nav {
       display: flex;
       border-bottom: 1px solid var(--white);
@@ -51,20 +53,62 @@
       transition: background 0.15s, color 0.15s;
     }
     .nav-tab:last-child { border-right: none; }
-    .nav-tab.active {
-      background: var(--blue);
-      color: var(--white);
-    }
-    .nav-tab:not(.active):hover {
-      background: var(--white);
-      color: var(--black);
-    }
+    .nav-tab.active { background: var(--blue); color: var(--white); }
+    .nav-tab:not(.active):hover { background: var(--white); color: var(--black); }
 
-    /* ── PAGE LAYOUT ── */
+    /* ── PAGE ── */
     .page {
       max-width: 860px;
       margin: 0 auto;
-      padding: 3rem 1.5rem 6rem;
+      padding: 0 1.5rem 6rem;
+      width: 100%;
+      flex: 1;
+    }
+
+    /* ── SECTION TABS ── */
+    .section-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--white);
+      margin-bottom: 2rem;
+      position: sticky;
+      top: 41px;
+      background: var(--black);
+      z-index: 90;
+    }
+    .section-tab {
+      padding: 0.8rem 1.2rem;
+      font-family: var(--f-mono);
+      font-size: 0.65rem;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #555;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      border-right: 1px solid #1a1a1a;
+      transition: color 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .section-tab:last-child { border-right: none; }
+    .section-tab .tab-num {
+      background: #111;
+      color: #444;
+      padding: 0.05rem 0.35rem;
+      font-size: 0.55rem;
+      transition: background 0.15s, color 0.15s;
+    }
+    .section-tab.active { color: var(--white); }
+    .section-tab.active .tab-num { background: var(--blue); color: var(--white); }
+    .section-tab:hover:not(.active) { color: #aaa; }
+
+    /* ── PANELS ── */
+    .section-panel { display: none; }
+    .section-panel.active {
+      display: block;
+      animation: fadeIn 0.2s ease forwards;
     }
 
     /* ── SECTION HEADER ── */
@@ -75,10 +119,9 @@
       margin-bottom: 1.5rem;
       border-bottom: 1px solid var(--white);
       padding-bottom: 0.75rem;
-      opacity: 0;
-      animation: fadeUp 0.5s forwards;
+      padding-top: 1.5rem;
     }
-    .section-num {
+    .section-num-badge {
       font-family: var(--f-mono);
       font-size: 0.6rem;
       font-weight: 300;
@@ -96,28 +139,20 @@
       line-height: 1;
     }
 
-    /* ── ABOUT TEXT ── */
-    .about-block {
-      margin-bottom: 4rem;
-    }
+    /* ── ABOUT ── */
     .about-text {
       font-size: 0.9rem;
       color: #ccc;
       line-height: 1.9;
       max-width: 60ch;
-      opacity: 0;
-      animation: fadeUp 0.5s 0.15s forwards;
     }
     .about-text p + p { margin-top: 1rem; }
 
-    /* tag chips */
     .tags {
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
-      margin-top: 1.2rem;
-      opacity: 0;
-      animation: fadeUp 0.5s 0.25s forwards;
+      margin-top: 1.5rem;
     }
     .tag {
       font-family: var(--f-mono);
@@ -129,30 +164,18 @@
       padding: 0.2rem 0.55rem;
       color: var(--white);
     }
-    .tag.blue {
-      background: var(--blue);
-      border-color: var(--blue);
-    }
+    .tag.blue { background: var(--blue); border-color: var(--blue); }
 
-    /* ── GAMES ── */
-    .games-block { margin-bottom: 4rem; }
-
+    /* ── MUSIC GAME ENTRIES ── */
     .game-entry {
       border: 1px solid var(--white);
       margin-bottom: -1px;
-      opacity: 0;
-      animation: fadeUp 0.5s forwards;
     }
-    .game-entry:nth-child(1) { animation-delay: 0.1s; }
-    .game-entry:nth-child(2) { animation-delay: 0.2s; }
-    .game-entry:nth-child(3) { animation-delay: 0.3s; }
-
     .game-header {
       display: flex;
       align-items: center;
       padding: 0.9rem 1.25rem;
       gap: 1rem;
-      border-bottom: 1px solid var(--white);
       background: var(--white);
       color: var(--black);
       cursor: pointer;
@@ -160,8 +183,7 @@
       transition: background 0.15s;
     }
     .game-header:hover { background: #e8e8e8; }
-
-    .game-header-open { background: var(--blue); color: var(--white); border-bottom-color: var(--blue); }
+    .game-header-open { background: var(--blue); color: var(--white); }
     .game-header-open:hover { background: #0000cc; }
 
     .game-title {
@@ -177,10 +199,10 @@
       font-family: var(--f-mono);
       font-size: 0.68rem;
       font-weight: 300;
-      letter-spacing: 0.05em;
       background: var(--black);
       color: var(--white);
       padding: 0.25rem 0.55rem;
+      white-space: nowrap;
     }
     .game-header-open .game-rating-badge {
       background: var(--white);
@@ -205,58 +227,18 @@
       font-size: 0.85rem;
       color: #aaa;
       line-height: 1.8;
-      max-width: 60ch;
     }
 
-    /* best30 image */
-    .game-image-wrapper {
-      width: 100%;
-      border: 1px solid var(--white);
-      overflow: hidden;
-      position: relative;
-      background: #111;
-    }
-    .game-image-wrapper img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-    .game-image-placeholder {
-      width: 100%;
-      padding: 3rem 1rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.75rem;
-      color: #444;
-      font-family: var(--f-mono);
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      text-align: center;
-      border: 2px dashed #333;
-    }
-    .game-image-placeholder .ph-icon { font-size: 2rem; }
-    .game-image-caption {
-      font-family: var(--f-mono);
-      font-size: 0.65rem;
-      color: #555;
-      letter-spacing: 0.1em;
-      text-align: right;
-    }
-
-    /* stat row */
-    .game-stats {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0;
-    }
+    /* stat cards */
+    .game-stats { display: flex; flex-wrap: wrap; }
     .game-stat {
       flex: 1;
       min-width: 120px;
       border: 1px solid var(--white);
       margin-right: -1px;
-      padding: 0.75rem 1rem;
+      margin-bottom: -1px;
+      padding: 0.7rem 0.9rem;
+      overflow: hidden;
     }
     .game-stat-label {
       display: block;
@@ -266,15 +248,70 @@
       color: #555;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      margin-bottom: 0.2rem;
+      margin-bottom: 0.3rem;
     }
     .game-stat-value {
       display: block;
       font-family: var(--f-display);
-      font-size: 1.5rem;
       font-weight: 300;
-      line-height: 1;
+      line-height: 1.2;
       color: var(--blue);
+      /* 白い薄い縁取りで黒背景でも見やすく */
+      -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.4);
+      /* 長いテキストに対応するためclampで自動縮小 */
+      font-size: clamp(0.8rem, 3.5vw, 1.5rem);
+      word-break: break-word;
+      overflow-wrap: anywhere;
+    }
+
+    /* image */
+    .game-image-wrapper {
+      width: 100%;
+      border: 1px solid var(--white);
+      overflow: hidden;
+      background: #111;
+    }
+    .game-image-wrapper img { width: 100%; height: auto; display: block; }
+    .game-image-caption {
+      font-family: var(--f-mono);
+      font-size: 0.6rem;
+      font-weight: 300;
+      color: #444;
+      letter-spacing: 0.1em;
+      text-align: right;
+    }
+
+    /* ── OTHER GAMES (03) ── */
+    .other-game-entry {
+      border: 1px solid var(--white);
+      margin-bottom: -1px;
+      padding: 1rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .other-game-name {
+      font-family: var(--f-display);
+      font-size: 1.1rem;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+    }
+    .other-game-note {
+      font-size: 0.82rem;
+      color: #888;
+      line-height: 1.7;
+    }
+    .other-game-tag {
+      display: inline-block;
+      font-family: var(--f-mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border: 1px solid #333;
+      padding: 0.1rem 0.4rem;
+      color: #555;
+      margin-top: 0.15rem;
+      width: fit-content;
     }
 
     /* ── FOOTER ── */
@@ -294,25 +331,20 @@
     }
     .footer-sq { width: 6px; height: 6px; background: var(--blue); }
 
-    /* ── ANIMATION ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* scroll reveal */
-    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-
     @media (max-width: 600px) {
-      .section-title { font-size: 1.6rem; }
-      .game-title { font-size: 1.1rem; }
+      .section-title { font-size: 1.5rem; }
+      .game-title { font-size: 1rem; }
+      .section-tab { padding: 0.75rem 0.7rem; font-size: 0.58rem; letter-spacing: 0.1em; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
   <nav>
     <a href="index.html" class="nav-tab">Links</a>
     <a href="about.html" class="nav-tab active">About</a>
@@ -320,32 +352,41 @@
 
   <div class="page">
 
-    <!-- ── 01 ABOUT ── -->
-    <div class="about-block">
-      <div class="section-header" style="animation-delay:0.05s">
-        <span class="section-num">01</span>
+    <!-- SECTION TABS -->
+    <div class="section-tabs">
+      <button class="section-tab active" onclick="switchSection('about', this)">
+        <span class="tab-num">01</span>About
+      </button>
+      <button class="section-tab" onclick="switchSection('ongeki', this)">
+        <span class="tab-num">02</span>音ゲー
+      </button>
+      <button class="section-tab" onclick="switchSection('games', this)">
+        <span class="tab-num">03</span>ゲーム
+      </button>
+    </div>
+
+    <!-- 01 ABOUT -->
+    <div class="section-panel active" id="panel-about">
+      <div class="section-header">
+        <span class="section-num-badge">01</span>
         <h2 class="section-title">About</h2>
       </div>
       <div class="about-text">
         <p>今やってる</p>
         <p>→音ゲ: Arcaea / CHUNITHM</p>
         <p>→それ以外: トリッカル / ブルアカ / デュエプレ(たまに)</p>
-      </div>
-      <div class="tags">
-        <!-- 好きなタグに変更してください -->
-        <span class="tag blue">音ゲー</span>
-        <span class="tag">ゲーム</span>
+        <p> </p>
+        <p>フレコ</p>
       </div>
     </div>
 
-    <!-- ── 02 GAMES ── -->
-    <div class="games-block reveal">
+    <!-- 02 音ゲー -->
+    <div class="section-panel" id="panel-ongeki">
       <div class="section-header">
-        <span class="section-num">02</span>
+        <span class="section-num-badge">02</span>
         <h2 class="section-title">音ゲー</h2>
       </div>
 
-      <!-- CHUNITHM -->
       <div class="game-entry">
         <div class="game-header" onclick="toggleGame(this)">
           <span class="game-title">CHUNITHM</span>
@@ -368,6 +409,7 @@
             </div>
           </div>
           <p class="game-desc">べ枠下限17を目指している　15+からは逃げている</p>
+          <p class="game-desc">♥→『ナイ／サンカヨウの子守唄』『ヴァルキュリア・ブリュンヒルデ』</p>
           <div class="game-image-wrapper">
             <img src="img/chunithm_best.jpg" alt="CHUNITHM Best30">
           </div>
@@ -375,7 +417,6 @@
         </div>
       </div>
 
-      <!-- Arcaea -->
       <div class="game-entry">
         <div class="game-header" onclick="toggleGame(this)">
           <span class="game-title">Arcaea</span>
@@ -394,31 +435,72 @@
             </div>
             <div class="game-stat">
               <span class="game-stat-label">Chart-Potential</span>
-              <span class="game-stat-value">13.02</span>
+              <span class="game-stat-value">13.01</span>
             </div>
           </div>
           <p class="game-desc">下埋めか10+/11スコア伸ばし、最近キャラ育て始めた</p>
-           <div class="game-image-wrapper">
+          <p class="game-desc">♥→『ラグランジュ』</p>
+          <div class="game-image-wrapper">
             <img src="img/arcaea_best.png" alt="Arcaea Best30">
-           </div>
+          </div>
           <p class="game-image-caption">// Generated by lowiro</p>
         </div>
       </div>
 
-      <!-- 追加ゲーム用テンプレート（必要に応じてコピー） -->
       <!--
+      テンプレート:
       <div class="game-entry">
         <div class="game-header" onclick="toggleGame(this)">
           <span class="game-title">ゲーム名</span>
-          <span class="game-rating-badge">Rating XX.XX</span>
+          <span class="game-rating-badge">XX.XX</span>
           <span class="game-toggle">＋</span>
         </div>
         <div class="game-body">
-          ...
+          <div class="game-stats">
+            <div class="game-stat">
+              <span class="game-stat-label">Label</span>
+              <span class="game-stat-value">Value</span>
+            </div>
+          </div>
+          <p class="game-desc">コメント</p>
         </div>
       </div>
       -->
+    </div>
 
+    <!-- 03 ゲーム -->
+    <div class="section-panel" id="panel-games">
+      <div class="section-header">
+        <span class="section-num-badge">03</span>
+        <h2 class="section-title">ゲーム</h2>
+      </div>
+
+      <div class="other-game-entry">
+        <span class="other-game-name">トリッカル</span>
+        <p class="other-game-note">クソ最近始めた</p>
+        <span class="other-game-tag">メイン</span>
+      </div>
+
+      <div class="other-game-entry">
+        <span class="other-game-name">ブルアカ</span>
+        <p class="other-game-note">最近モチベ無さ気味</p>
+        <span class="other-game-tag">サブ</span>
+      </div>
+
+      <div class="other-game-entry">
+        <span class="other-game-name">デュエプレ</span>
+        <p class="other-game-note">マジでたまにやる</p>
+        <span class="other-game-tag">たまに</span>
+      </div>
+
+      <!--
+      テンプレート:
+      <div class="other-game-entry">
+        <span class="other-game-name">ゲーム名</span>
+        <p class="other-game-note">コメント</p>
+        <span class="other-game-tag">タグ</span>
+      </div>
+      -->
     </div>
 
   </div>
@@ -429,23 +511,21 @@
   </footer>
 
   <script>
+    function switchSection(id, btn) {
+      document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('panel-' + id).classList.add('active');
+      document.querySelectorAll('.section-tab').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+    }
+
     function toggleGame(header) {
       const body = header.nextElementSibling;
       const toggle = header.querySelector('.game-toggle');
       const isOpen = body.classList.contains('open');
-
       body.classList.toggle('open', !isOpen);
       header.classList.toggle('game-header-open', !isOpen);
       toggle.textContent = isOpen ? '＋' : '－';
     }
-
-    // scroll reveal
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
-      });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
   </script>
 
 </body>
