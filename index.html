@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>dustcanz — Links</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;900&family=IBM+Plex+Mono:wght@400;700&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;600&family=IBM+Plex+Mono:wght@300;400&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet" />
   <style>
     :root {
       --black: #000000;
       --white: #ffffff;
       --blue:  #0000ff;
-      --f-display: 'Barlow Condensed', sans-serif;
+      --f-display: 'Outfit', sans-serif;
       --f-mono:    'IBM Plex Mono', monospace;
       --f-body:    'Noto Sans JP', sans-serif;
     }
@@ -23,6 +23,7 @@
       background: var(--black);
       color: var(--white);
       font-family: var(--f-body);
+      font-weight: 300;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -31,7 +32,7 @@
     /* ── NAV ── */
     nav {
       display: flex;
-      border-bottom: 2px solid var(--white);
+      border-bottom: 1px solid var(--white);
       position: sticky;
       top: 0;
       z-index: 100;
@@ -39,26 +40,21 @@
     }
     .nav-tab {
       flex: 1;
-      padding: 1rem;
+      padding: 0.9rem;
       text-align: center;
       font-family: var(--f-mono);
-      font-size: 0.75rem;
-      letter-spacing: 0.2em;
+      font-size: 0.7rem;
+      font-weight: 300;
+      letter-spacing: 0.25em;
       text-transform: uppercase;
       text-decoration: none;
       color: var(--white);
-      border-right: 2px solid var(--white);
+      border-right: 1px solid var(--white);
       transition: background 0.15s, color 0.15s;
     }
     .nav-tab:last-child { border-right: none; }
-    .nav-tab.active {
-      background: var(--blue);
-      color: var(--white);
-    }
-    .nav-tab:not(.active):hover {
-      background: var(--white);
-      color: var(--black);
-    }
+    .nav-tab.active { background: var(--blue); color: var(--white); }
+    .nav-tab:not(.active):hover { background: var(--white); color: var(--black); }
 
     /* ── MAIN ── */
     main {
@@ -77,53 +73,46 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 1.2rem;
+      gap: 1rem;
       margin-bottom: 3rem;
       width: 100%;
       opacity: 0;
       animation: fadeUp 0.5s 0.1s forwards;
     }
-
     .avatar {
-      width: 90px;
-      height: 90px;
-      border: 3px solid var(--white);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2.5rem;
-      overflow: hidden;
-      flex-shrink: 0;
+      width: 86px; height: 86px;
+      border: 1px solid var(--white);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.2rem;
+      overflow: hidden; flex-shrink: 0;
       background: var(--black);
     }
     .avatar img { width: 100%; height: 100%; object-fit: cover; }
-
     .profile-name {
       font-family: var(--f-display);
-      font-size: 2.8rem;
-      font-weight: 900;
-      letter-spacing: 0.05em;
+      font-size: 2.4rem;
+      font-weight: 200;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       line-height: 1;
       text-align: center;
     }
-
     .profile-handle {
       font-family: var(--f-mono);
-      font-size: 0.75rem;
-      color: var(--blue);
+      font-size: 0.7rem;
+      font-weight: 300;
       letter-spacing: 0.15em;
       background: var(--white);
-      padding: 0.2rem 0.6rem;
+      padding: 0.15rem 0.6rem;
       color: var(--black);
     }
-
     .profile-bio {
-      font-size: 0.85rem;
-      color: #aaa;
+      font-size: 0.8rem;
+      color: #888;
       text-align: center;
       line-height: 1.7;
-      max-width: 30ch;
+      max-width: 28ch;
+      font-weight: 300;
     }
 
     /* ── DIVIDER ── */
@@ -136,14 +125,15 @@
       opacity: 0;
       animation: fadeUp 0.5s 0.2s forwards;
     }
-    .divider-line { flex: 1; height: 2px; background: var(--white); }
+    .divider-line { flex: 1; height: 1px; background: #333; }
     .divider-label {
       font-family: var(--f-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
+      font-size: 0.6rem;
+      font-weight: 300;
+      letter-spacing: 0.25em;
       text-transform: uppercase;
       white-space: nowrap;
-      color: #888;
+      color: #555;
     }
 
     /* ── LINK CARDS ── */
@@ -151,18 +141,17 @@
       display: flex;
       flex-direction: column;
       width: 100%;
-      gap: 0;
     }
 
     .link-card {
       display: flex;
       align-items: center;
       width: 100%;
-      border: 2px solid var(--white);
+      border: 1px solid var(--white);
       border-top: none;
       text-decoration: none;
       color: var(--white);
-      padding: 1rem 1.25rem;
+      padding: 0.9rem 1.25rem;
       position: relative;
       overflow: hidden;
       transition: background 0.15s, color 0.15s;
@@ -170,66 +159,156 @@
       animation: fadeUp 0.4s forwards;
       gap: 1rem;
     }
-    .link-card:first-child { border-top: 2px solid var(--white); }
+    .link-card:first-child { border-top: 1px solid var(--white); }
 
     .link-card::after {
       content: '→';
       position: absolute;
       right: 1.25rem;
       font-family: var(--f-mono);
-      font-size: 1rem;
+      font-size: 0.85rem;
       transition: transform 0.2s;
     }
 
-    .link-card:hover {
-      background: var(--blue);
-      color: var(--white);
-    }
-    .link-card:hover::after { transform: translateX(4px); }
-    .link-card:hover .link-platform { color: rgba(255,255,255,0.6); }
+    /* no-link: non-clickable, no arrow */
+    .link-card.no-link { cursor: default; }
+    .link-card.no-link::after { display: none; }
+    .link-card.no-link:hover { background: transparent; color: var(--white); }
+
+    .link-card:not(.no-link):hover { background: var(--blue); color: var(--white); }
+    .link-card:not(.no-link):hover::after { transform: translateX(4px); }
+    .link-card:not(.no-link):hover .link-platform { color: rgba(255,255,255,0.5); }
 
     .link-icon {
-      width: 2rem;
-      height: 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      width: 1.8rem; height: 1.8rem;
+      display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
     }
-    .link-icon svg { width: 1.1rem; height: 1.1rem; }
+    .link-icon svg { width: 1rem; height: 1rem; }
 
     .link-text { flex: 1; }
     .link-platform {
       display: block;
       font-family: var(--f-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
+      font-size: 0.6rem;
+      font-weight: 300;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: #888;
-      margin-bottom: 0.1rem;
+      color: #666;
+      margin-bottom: 0.15rem;
       transition: color 0.15s;
     }
     .link-name {
       display: block;
       font-family: var(--f-display);
-      font-size: 1.3rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      line-height: 1;
+      font-size: 1.15rem;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      line-height: 1.1;
     }
 
-    /* stagger */
     .link-card:nth-child(1) { animation-delay: 0.25s; }
     .link-card:nth-child(2) { animation-delay: 0.32s; }
     .link-card:nth-child(3) { animation-delay: 0.39s; }
     .link-card:nth-child(4) { animation-delay: 0.46s; }
-    .link-card:nth-child(5) { animation-delay: 0.53s; }
-    .link-card:nth-child(6) { animation-delay: 0.60s; }
+
+    /* ── ACCORDION ── */
+    .accordion-wrap {
+      width: 100%;
+      border: 1px solid var(--white);
+      border-top: none;
+      opacity: 0;
+      animation: fadeUp 0.4s 0.46s forwards;
+    }
+
+    .accordion-trigger {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      padding: 0.9rem 1.25rem;
+      gap: 1rem;
+      background: transparent;
+      border: none;
+      color: var(--white);
+      cursor: pointer;
+      text-align: left;
+      transition: background 0.15s;
+      position: relative;
+    }
+    .accordion-trigger::after {
+      content: '+';
+      position: absolute;
+      right: 1.25rem;
+      font-family: var(--f-mono);
+      font-size: 1rem;
+      font-weight: 300;
+      color: #555;
+      transition: color 0.2s;
+    }
+    .accordion-trigger.open::after { content: '−'; color: var(--white); }
+    .accordion-trigger:hover { background: #0d0d0d; }
+    .accordion-trigger.open { background: #080808; }
+
+    .accordion-body {
+      display: none;
+      flex-direction: column;
+      border-top: 1px solid #222;
+    }
+    .accordion-body.open { display: flex; }
+
+    .sub-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.7rem 1.25rem 0.7rem 1.5rem;
+      text-decoration: none;
+      color: #bbb;
+      border-bottom: 1px solid #1a1a1a;
+      position: relative;
+      transition: background 0.15s, color 0.15s;
+    }
+    .sub-link:last-child { border-bottom: none; }
+    .sub-link::after {
+      content: '→';
+      position: absolute;
+      right: 1.25rem;
+      font-family: var(--f-mono);
+      font-size: 0.75rem;
+      color: #333;
+      transition: transform 0.2s, color 0.2s;
+    }
+    .sub-link:hover { background: var(--blue); color: var(--white); }
+    .sub-link:hover::after { transform: translateX(4px); color: var(--white); }
+    .sub-link:hover .sub-link-instance { color: rgba(255,255,255,0.45); }
+
+    .sub-link-icon {
+      width: 1.4rem; height: 1.4rem;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; opacity: 0.4;
+    }
+    .sub-link-icon svg { width: 0.85rem; height: 0.85rem; }
+
+    .sub-link-instance {
+      display: block;
+      font-family: var(--f-mono);
+      font-size: 0.58rem;
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      color: #444;
+      margin-bottom: 0.1rem;
+      transition: color 0.15s;
+    }
+    .sub-link-name {
+      display: block;
+      font-family: var(--f-display);
+      font-size: 1rem;
+      font-weight: 300;
+      letter-spacing: 0.06em;
+    }
 
     /* ── FOOTER ── */
     footer {
-      border-top: 2px solid var(--white);
+      border-top: 1px solid #1a1a1a;
       padding: 1rem 1.5rem;
       display: flex;
       justify-content: space-between;
@@ -237,40 +316,34 @@
     }
     footer p {
       font-family: var(--f-mono);
-      font-size: 0.65rem;
-      color: #555;
-      letter-spacing: 0.1em;
+      font-size: 0.6rem;
+      font-weight: 300;
+      color: #333;
+      letter-spacing: 0.12em;
     }
-    .footer-sq {
-      width: 8px; height: 8px;
-      background: var(--blue);
-    }
+    .footer-sq { width: 6px; height: 6px; background: var(--blue); }
 
-    /* ── ANIMATION ── */
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
+      from { opacity: 0; transform: translateY(14px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
     @media (max-width: 480px) {
-      .profile-name { font-size: 2rem; }
+      .profile-name { font-size: 1.8rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
   <nav>
     <a href="index.html" class="nav-tab active">Links</a>
     <a href="about.html" class="nav-tab">About</a>
   </nav>
 
-  <!-- MAIN -->
   <main>
     <div class="profile">
       <div class="avatar">
-        <!-- アバター画像: <img src="img/avatar.jpg" alt="avatar"> -->
-        🎮
+        <img src="img/normalavatar.jpg" alt="avatar">
       </div>
       <h1 class="profile-name">dustcanz</h1>
       <span class="profile-handle">@dustcanz</span>
@@ -285,7 +358,7 @@
 
     <div class="links">
 
-      <!-- Twitter -->
+      <!-- Twitter / X -->
       <a href="https://x.com/@_xeirv" class="link-card" target="_blank" rel="noopener">
         <div class="link-icon">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.259 5.631 5.905-5.631zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
@@ -296,8 +369,8 @@
         </div>
       </a>
 
-      <!-- Discord -->
-      <a href="" class="link-card" target="_blank" rel="noopener">
+      <!-- Discord (IDのみ・矢印なし・クリック不可) -->
+      <div class="link-card no-link">
         <div class="link-icon">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
         </div>
@@ -305,7 +378,72 @@
           <span class="link-platform">Discord</span>
           <span class="link-name">agara1010</span>
         </div>
-      </a>
+      </div>
+
+      <!-- Misskey アコーディオン -->
+      <div class="accordion-wrap">
+        <button class="accordion-trigger" onclick="toggleAccordion(this)" aria-expanded="false">
+          <div class="link-icon">
+            <!-- Misskey SVG (猫耳ロゴ簡略版) -->
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M4 3h4l2 4H4V3zm12 0h4v4h-6l2-4zM2 8h20v13H2V8zm5 3v5h2v-5H7zm4 0v5h2v-5h-2zm4 0v5h2v-5h-2z"/>
+            </svg>
+          </div>
+          <div class="link-text">
+            <span class="link-platform">Misskey</span>
+            <span class="link-name" style="font-family:var(--f-display);font-size:1.15rem;font-weight:300;letter-spacing:0.08em;">Accounts</span>
+          </div>
+        </button>
+
+        <div class="accordion-body">
+
+          <!-- misskey.io/flya -->
+          <a href="https://misskey.io/@flya" class="sub-link" target="_blank" rel="noopener">
+            <div class="sub-link-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 3h4l2 4H4V3zm12 0h4v4h-6l2-4zM2 8h20v13H2V8zm5 3v5h2v-5H7zm4 0v5h2v-5h-2zm4 0v5h2v-5h-2z"/></svg>
+            </div>
+            <div>
+              <span class="sub-link-instance">Misskey.io(1)/span>
+              <span class="sub-link-name">@flya</span>
+            </div>
+          </a>
+
+          <!-- misskey.io/amerain -->
+          <a href="https://misskey.io/@amerain" class="sub-link" target="_blank" rel="noopener">
+            <div class="sub-link-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 3h4l2 4H4V3zm12 0h4v4h-6l2-4zM2 8h20v13H2V8zm5 3v5h2v-5H7zm4 0v5h2v-5h-2zm4 0v5h2v-5h-2z"/></svg>
+            </div>
+            <div>
+              <span class="sub-link-instance">Misskey.io(2)</span>
+              <span class="sub-link-name">@amerain</span>
+            </div>
+          </a>
+
+          <!-- chur.hello-kiwi.com/diveb -->
+          <a href="https://chur.hello-kiwi.com/@diveb" class="sub-link" target="_blank" rel="noopener">
+            <div class="sub-link-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 3h4l2 4H4V3zm12 0h4v4h-6l2-4zM2 8h20v13H2V8zm5 3v5h2v-5H7zm4 0v5h2v-5h-2zm4 0v5h2v-5h-2z"/></svg>
+            </div>
+            <div>
+              <span class="sub-link-instance">にゅーじーらんど</span>
+              <span class="sub-link-name">@diveb</span>
+            </div>
+          </a>
+
+          <!-- 追加アカウント用テンプレート（コピーして使う）
+          <a href="https://example.com/@yourhandle" class="sub-link" target="_blank" rel="noopener">
+            <div class="sub-link-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 3h4l2 4H4V3zm12 0h4v4h-6l2-4zM2 8h20v13H2V8zm5 3v5h2v-5H7zm4 0v5h2v-5h-2zm4 0v5h2v-5h-2z"/></svg>
+            </div>
+            <div>
+              <span class="sub-link-instance">example.com</span>
+              <span class="sub-link-name">@yourhandle</span>
+            </div>
+          </a>
+          -->
+
+        </div>
+      </div>
 
     </div>
   </main>
@@ -314,6 +452,16 @@
     <div class="footer-sq"></div>
     <p>GitHub Pages</p>
   </footer>
+
+  <script>
+    function toggleAccordion(btn) {
+      const body = btn.nextElementSibling;
+      const isOpen = body.classList.contains('open');
+      body.classList.toggle('open', !isOpen);
+      btn.classList.toggle('open', !isOpen);
+      btn.setAttribute('aria-expanded', String(!isOpen));
+    }
+  </script>
 
 </body>
 </html>
